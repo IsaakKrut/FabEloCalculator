@@ -46,6 +46,6 @@ public class HttpServiceImpl implements HttpService {
         } catch (IOException e) {
             e.printStackTrace();
         }
-        return -1;
+        return 1500;
     }
 }
