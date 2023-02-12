@@ -23,39 +23,26 @@ public class HttpServiceImpl implements HttpService {
             urlAddress = urlAddress.replaceAll(".$", "");
             URL url = new URL(urlAddress);
 
-            // Get the input stream through URL Connection
-
-
             URLConnection con = url.openConnection();
-            InputStream is = con.getInputStream();
+            try (InputStream is = con.getInputStream();
+                BufferedReader br = new BufferedReader(new InputStreamReader(is))){
+                String line = null;
 
-            // Once you have the Input Stream, it's just plain old Java IO stuff.
-
-            // For this case, since you are interested in getting plain-text web page
-            // I'll use a reader and output the text content to System.out.
-
-            // For binary content, it's better to directly read the bytes from stream and write
-            // to the target file.
-
-            BufferedReader br = new BufferedReader(new InputStreamReader(is));
-            String line = null;
-
-            int counter = 0;
-            boolean found = false;
-            // read each line and write to System.out
-            while ((line = br.readLine()) != null) {
-                if (line.matches(".*<td><i class=\".*flag\" data-toggle=\"tooltip\" data-placement=\"top\" title=\".*</td>.*")){
-                    found = true;
-                }
-                if(found){
-                    counter++;
-                }
-                if (counter == 4){
-                    return Integer.parseInt(line.trim());
+                int counter = 0;
+                boolean found = false;
+                // read each line and write to System.out
+                while ((line = br.readLine()) != null) {
+                    if (line.matches(".*<td><i class=\".*flag\" data-toggle=\"tooltip\" data-placement=\"top\" title=\".*</td>.*")){
+                        found = true;
+                    }
+                    if(found){
+                        counter++;
+                    }
+                    if (counter == 4){
+                        return Integer.parseInt(line.trim());
+                    }
                 }
             }
-            br.close();
-            is.close();
         } catch (IOException e) {
             e.printStackTrace();
         }
