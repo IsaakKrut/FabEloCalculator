@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <title>Calculate your elo</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+</head>
+
+<body>
+
+<div>
+    <h5>Player Name</h5>
+    <span th:text="${tournament.player.name}"></span>
+</div>
+
+<div>
+    <h5>K Factor</h5>
+    <span th:text="${tournament.kFactor}"></span>
+</div>
+
+<div>
+    <h5>Format</h5>
+    <span th:text="${tournament.format}"></span>
+</div>
+
+<div>
+    <h5>Elo Δ</h5>
+    <span th:text="${tournament.pointsWon}"></span>
+</div>
+
+<p></p>
+<p></p>
+
+<a th:href="@{/}">
+    <button type="button">Go Back</button>
+</a>
+
+</body>
+
+</html>

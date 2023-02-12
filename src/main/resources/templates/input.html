@@ -1,0 +1,32 @@
+<!DOCTYPE HTML>
+<html xmlns:th="https://www.thymeleaf.org">
+<head>
+    <title>Calculate your elo</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+</head>
+<body>
+<h1>Form</h1>
+<form action="#" th:action="@{/}" th:object="${request}" method="post">
+    <p>Format:
+    <select th:name="format" class="selectpicker">
+        <option th:value="Constructed">Constructed</option>
+        <option th:value="Limited">Limited</option>
+    </select>
+    </p>
+    <p>K Factor:
+        <select th:name="kFactor" class="selectpicker">
+            <option th:value="8">8</option>
+            <option th:value="16">16</option>
+            <option th:value="32">32</option>
+            <option th:value="64">64</option>
+        </select>
+    </p>
+    <label for="matches">Copy your matches from GEM:
+    </label>
+    <p><img  src="../static/images/gem.png" th:src="@{/images/gem.png}"/></p>
+    <p>
+        <textarea id="matches" rows="20" cols="80" th:field="*{matches}" /></p>
+    <p><input type="submit" value="Submit" /> <input type="reset" value="Reset" /></p>
+</form>
+</body>
+</html>
