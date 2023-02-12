@@ -54,7 +54,8 @@ public class HttpServiceImpl implements HttpService {
                     return Integer.parseInt(line.trim());
                 }
             }
-
+            br.close();
+            is.close();
         } catch (IOException e) {
             e.printStackTrace();
         }
