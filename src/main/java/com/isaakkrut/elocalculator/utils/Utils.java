@@ -25,6 +25,9 @@ public class Utils {
     public static List<Match> processMatches(String input){
         List<Match> matches = new ArrayList<>();
         String[] matchStrings = input.split("\n");
+        if (matchStrings.length > 50){
+            throw new RuntimeException("Input size is too big");
+        }
         for (var matchString : matchStrings){
             String[] tokens = matchString.split("\t");
             if (!tokens[0].contains("Round") && !tokens[0].contains("Playoff") && tokens.length >= 4){
@@ -46,7 +49,6 @@ public class Utils {
                 }
                 matches.add(match);
             }
-
         }
 
         Player mainPlayer = new Player();
