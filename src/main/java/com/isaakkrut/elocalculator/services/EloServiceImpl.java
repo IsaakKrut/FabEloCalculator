@@ -50,6 +50,7 @@ public class EloServiceImpl implements EloService {
             calculationService.calculateElo(match);
         });
         tournament.setPointsWon(tournament.getMatches().stream().mapToDouble(Match::getPointsWon).sum()*tournament.getkFactor());
+        calculationService.setAverageOpponentElo(tournament);
         return tournament;
     }
 }

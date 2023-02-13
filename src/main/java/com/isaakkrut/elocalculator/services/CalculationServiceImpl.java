@@ -1,6 +1,7 @@
 package com.isaakkrut.elocalculator.services;
 
 import com.isaakkrut.elocalculator.model.Match;
+import com.isaakkrut.elocalculator.model.Tournament;
 import com.isaakkrut.elocalculator.utils.Result;
 import org.springframework.stereotype.Service;
 
@@ -12,4 +13,13 @@ public class CalculationServiceImpl implements CalculationService {
         double pointsWon = (match.getResult() == Result.WIN ? 1 : 0) - expectedScore;
         match.setPointsWon(pointsWon);
     }
+
+    @Override
+    public void setAverageOpponentElo(Tournament tournament) {
+        int totalOpponentElo = tournament.getMatches().stream().mapToInt(match->match.getPlayer2().getElo()).sum();
+        double averageOpponentElo = (totalOpponentElo *1.0) / tournament.getMatches().size();
+        tournament.setAverageElo(averageOpponentElo);
+    }
+
+
 }

@@ -2,6 +2,12 @@
 
 <html xmlns:th="http://www.thymeleaf.org">
 
+<style type="text/css">
+  td {
+    padding: 0 15px;
+  }
+</style>
+
 <head>
     <title>Calculate your elo</title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
@@ -25,8 +31,30 @@
 </div>
 
 <div>
-    <h5>Elo Δ</h5>
-    <span th:text="${tournament.pointsWon}"></span>
+    <table>
+        <thead>
+        <tr>
+            <th>You</th>
+            <th>Opponent</th>
+            <th>Your Elo</th>
+            <th>Opponent's Elo</th>
+            <th>Points Δ</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="match: ${tournament.matches}">
+            <td th:text="${match.player1.name}"></td>
+            <td th:text="${match.player2.name}"></td>
+            <td th:text="${match.player1.elo}"></td>
+            <td th:text="${match.player2.elo}"></td>
+            <td th:text="${#numbers.formatDecimal(match.pointsWon*tournament.kFactor,1,2)}"></td>
+        </tr>
+        </tbody>
+    </table>
+    <h5>Total Elo Δ</h5>
+    <span th:text="${#numbers.formatDecimal(tournament.pointsWon,1,2)}"></span>
+    <h5>Average Opponent Elo</h5>
+    <span th:text="${#numbers.formatDecimal(tournament.averageElo,1,2)}"></span>
 </div>
 
 <p></p>

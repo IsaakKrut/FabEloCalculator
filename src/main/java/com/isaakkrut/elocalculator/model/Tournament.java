@@ -10,13 +10,22 @@ public class Tournament {
     List<Match> matches;
     private Player player;
     Format format;
-    double pointsWon;
+    Double pointsWon;
+    Double averageElo;
 
-    public double getPointsWon() {
+    public Double getAverageElo() {
+        return averageElo;
+    }
+
+    public void setAverageElo(Double averageElo) {
+        this.averageElo = averageElo;
+    }
+
+    public Double getPointsWon() {
         return pointsWon;
     }
 
-    public void setPointsWon(double pointsWon) {
+    public void setPointsWon(Double pointsWon) {
         this.pointsWon = pointsWon;
     }
 
