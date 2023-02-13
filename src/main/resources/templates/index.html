@@ -2,11 +2,15 @@
 
 <html xmlns:th="http://www.thymeleaf.org">
 
-<style type="text/css">
-  td {
-    padding: 0 15px;
-  }
-</style>
+<!-- Latest compiled and minified CSS -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@3.4.1/dist/css/bootstrap.min.css" integrity="sha384-HSMxcRTRxnN+Bdg0JdbxYKrThecOKuH5zCYotlSAcp1+c8xmyTe9GYg1l9a69psu" crossorigin="anonymous">
+
+<!-- Optional theme -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@3.4.1/dist/css/bootstrap-theme.min.css" integrity="sha384-6pzBo3FDv/PJ8r2KRkGHifhEocL+1X2rVCTTkUfGk7/0pbek5mMa1upzvWbrUbOZ" crossorigin="anonymous">
+
+<!-- Latest compiled and minified JavaScript -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@3.4.1/dist/js/bootstrap.min.js" integrity="sha384-aJ21OjlMXNL5UyIl/XNwTMqvzeRMZH2w8c5cRVpzpU8Y5bApTppSuUkhZXN0VxHd" crossorigin="anonymous"></script>
+
 
 <head>
     <title>Calculate your elo</title>
@@ -14,60 +18,67 @@
 </head>
 
 <body>
+<div class="row">
+    <div class="col-sm-1">
+    </div>
+    <div class="col-sm-11">
+    <div>
+        <h5><strong>Player Name:</strong></h5>
+        <span th:text="${tournament.player.name}"></span>
+    </div>
 
-<div>
-    <h5>Player Name</h5>
-    <span th:text="${tournament.player.name}"></span>
+    <div>
+        <h5><strong>K Factor:</strong></h5>
+        <span th:text="${tournament.kFactor}"></span>
+    </div>
+
+    <div>
+        <h5><strong>Format:</strong></h5>
+        <span th:text="${tournament.format}"></span>
+    </div>
+
+    <div>
+        <table class="table">
+            <thead>
+            <tr>
+                <th scope="col">Round</th>
+                <th scope="col">You</th>
+                <th scope="col">Opponent</th>
+                <th scope="col">Your Elo</th>
+                <th scope="col">Opponent's Elo</th>
+                <th scope="col">Match Result</th>
+                <th scope="col">Rating Change</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr scope="row" th:each="match, iterator: ${tournament.matches}">
+                <td th:text="${iterator.count}"></td>
+                <td th:text="${match.player1.name}"></td>
+                <td th:text="${match.player2.name}"></td>
+                <td th:text="${match.player1.elo}"></td>
+                <td th:text="${match.player2.elo}"></td>
+                <td th:text="${match.result}"></td>
+                <td th:text="${#numbers.formatDecimal(match.pointsWon*tournament.kFactor,1,2)}"></td>
+            </tr>
+            <tr>
+                <td colspan="3"></td>
+                <td><strong>Average Opponent Elo:<strong></td>
+                <td th:text="${#numbers.formatDecimal(tournament.averageElo,1,2)}"></td>
+                <td><strong>Total Elo Δ:</strong></td>
+                <td th:text="${#numbers.formatDecimal(tournament.pointsWon,1,2)}"></td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <p></p>
+    <p></p>
+
+    <a th:href="@{/}">
+        <button type="button">Go Back</button>
+    </a>
+    </div>
 </div>
-
-<div>
-    <h5>K Factor</h5>
-    <span th:text="${tournament.kFactor}"></span>
-</div>
-
-<div>
-    <h5>Format</h5>
-    <span th:text="${tournament.format}"></span>
-</div>
-
-<div>
-    <table>
-        <thead>
-        <tr>
-            <th>Round</th>
-            <th>You</th>
-            <th>Opponent</th>
-            <th>Your Elo</th>
-            <th>Opponent's Elo</th>
-            <th>Match Result</th>
-            <th>Rating Change</th>
-        </tr>
-        </thead>
-        <tbody>
-        <tr th:each="match, iterator: ${tournament.matches}">
-            <td th:text="${iterator.count}"></td>
-            <td th:text="${match.player1.name}"></td>
-            <td th:text="${match.player2.name}"></td>
-            <td th:text="${match.player1.elo}"></td>
-            <td th:text="${match.player2.elo}"></td>
-            <td th:text="${match.result}"></td>
-            <td th:text="${#numbers.formatDecimal(match.pointsWon*tournament.kFactor,1,2)}"></td>
-        </tr>
-        </tbody>
-    </table>
-    <h5>Total Elo Δ</h5>
-    <span th:text="${#numbers.formatDecimal(tournament.pointsWon,1,2)}"></span>
-    <h5>Average Opponent Elo</h5>
-    <span th:text="${#numbers.formatDecimal(tournament.averageElo,1,2)}"></span>
-</div>
-
-<p></p>
-<p></p>
-
-<a th:href="@{/}">
-    <button type="button">Go Back</button>
-</a>
-
 </body>
 
 </html>

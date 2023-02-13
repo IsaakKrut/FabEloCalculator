@@ -1,32 +1,63 @@
 <!DOCTYPE HTML>
 <html xmlns:th="https://www.thymeleaf.org">
+
+<!-- Latest compiled and minified CSS -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@3.4.1/dist/css/bootstrap.min.css" integrity="sha384-HSMxcRTRxnN+Bdg0JdbxYKrThecOKuH5zCYotlSAcp1+c8xmyTe9GYg1l9a69psu" crossorigin="anonymous">
+
+<!-- Optional theme -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@3.4.1/dist/css/bootstrap-theme.min.css" integrity="sha384-6pzBo3FDv/PJ8r2KRkGHifhEocL+1X2rVCTTkUfGk7/0pbek5mMa1upzvWbrUbOZ" crossorigin="anonymous">
+
+<!-- Latest compiled and minified JavaScript -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@3.4.1/dist/js/bootstrap.min.js" integrity="sha384-aJ21OjlMXNL5UyIl/XNwTMqvzeRMZH2w8c5cRVpzpU8Y5bApTppSuUkhZXN0VxHd" crossorigin="anonymous"></script>
 <head>
     <title>Calculate your ELO</title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 </head>
 <body>
-<h1>Calculate you ELO</h1>
-<form action="#" th:action="@{/}" th:object="${request}" method="post">
-    <p>1. Select Format:
-    <select th:name="format" class="selectpicker">
-        <option th:value="Constructed">Constructed</option>
-        <option th:value="Limited">Limited</option>
-    </select>
-    </p>
-    <p>2. Select K Factor:
-        <select th:name="kFactor" class="selectpicker">
-            <option th:value="8">8</option>
-            <option th:value="16">16</option>
-            <option th:value="32">32</option>
-            <option th:value="64">64</option>
-        </select>
-    </p>
-    <label for="matches">3. Copy your matches from GEM into the field below:
-    </label>
-    <p><img  src="../static/images/gem.png" th:src="@{/images/gem.png}"/></p>
-    <p>
-        <textarea id="matches" rows="20" cols="80" th:field="*{matches}" /></p>
-    <p><input type="submit" value="Submit" /> <input type="reset" value="Reset" /></p>
-</form>
+<div class="row">
+    <div class="col-sm-1">
+    </div>
+    <div class="col-sm-5">
+        <h1>Calculate your ELO</h1>
+    </div>
+</div>
+<div class="row">
+    <div class="col-sm-1"></div>
+    <form class="col-sm-5" action="#" th:action="@{/}" th:object="${request}" method="post">
+        <div class="row">
+            <div class="form-group col-sm-4">
+                <label for="format">1. Select Format:</label>
+                <select th:name="format" class="form-control" id="format">
+                    <option th:value="Constructed">Constructed</option>
+                    <option th:value="Limited">Limited</option>
+                </select>
+            </div>
+            <div class="form-group col-sm-4">
+                <label for="kfactor">2. Select K Factor:</label>
+                <select th:name="kFactor" class="form-control" id="kfactor">
+                    <option th:value="8">8</option>
+                    <option th:value="16">16</option>
+                    <option th:value="32">32</option>
+                    <option th:value="64">64</option>
+                </select>
+            </div>
+        </div>
+        <div class="row">
+        <div class="form-group col-sm-8">
+            <div class="row">
+                <label for="matches">3. Copy your matches from GEM into the field below:</label>
+            </div>
+            <p><img  src="../static/images/gem.png" th:src="@{/images/gem.png}"/></p>
+            <div class="row">
+            <textarea class="form-control col-sm-6" id="matches" rows="15" cols="40" th:field="*{matches}"></textarea>
+            </div>
+        </div>
+        </div>
+        <div class="row">
+        <p><input type="submit"  class="btn btn-success" value="Calculate Elo" />
+            <input type="reset" class="btn btn-secondary" value="Reset" /></p>
+        </div>
+    </form>
+</div>
 </body>
 </html>
