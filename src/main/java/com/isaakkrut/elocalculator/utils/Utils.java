@@ -28,9 +28,12 @@ public class Utils {
         if (matchStrings.length > 50){
             throw new RuntimeException("Input size is too big");
         }
+        if (matchStrings.length <= 2){
+            throw new RuntimeException("Input size is too small");
+        }
         for (var matchString : matchStrings){
             String[] tokens = matchString.split("\t");
-            if (!tokens[0].contains("Round") && !tokens[0].contains("Playoff") && tokens.length >= 4){
+            if (!tokens[0].contains("Round") && !tokens[0].contains("Playoff") && tokens.length >= 4 && tokens.length <=5){
                 Match match = new Match();
                 Player player1 = new Player();
                 Player player2 = new Player();
@@ -51,6 +54,9 @@ public class Utils {
             }
         }
 
+        if (matches.size() <= 2){
+            throw new RuntimeException("Input size is too small");
+        }
         Player mainPlayer = new Player();
         if (matches.get(0).getPlayer1().getName().equals(matches.get(1).getPlayer1().getName()) ||
                 matches.get(0).getPlayer1().getName().equals(matches.get(1).getPlayer2().getName())){
