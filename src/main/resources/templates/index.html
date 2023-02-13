@@ -34,19 +34,23 @@
     <table>
         <thead>
         <tr>
+            <th>Round</th>
             <th>You</th>
             <th>Opponent</th>
             <th>Your Elo</th>
             <th>Opponent's Elo</th>
+            <th>Match Result</th>
             <th>Rating Change</th>
         </tr>
         </thead>
         <tbody>
-        <tr th:each="match: ${tournament.matches}">
+        <tr th:each="match, iterator: ${tournament.matches}">
+            <td th:text="${iterator.count}"></td>
             <td th:text="${match.player1.name}"></td>
             <td th:text="${match.player2.name}"></td>
             <td th:text="${match.player1.elo}"></td>
             <td th:text="${match.player2.elo}"></td>
+            <td th:text="${match.result}"></td>
             <td th:text="${#numbers.formatDecimal(match.pointsWon*tournament.kFactor,1,2)}"></td>
         </tr>
         </tbody>
