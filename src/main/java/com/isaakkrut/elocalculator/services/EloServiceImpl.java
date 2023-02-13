@@ -35,6 +35,7 @@ public class EloServiceImpl implements EloService {
 
     @Override
     public Tournament calculateElo(Request request) {
+        System.out.println(request);
         Tournament tournament = new Tournament();
         tournament.setkFactor(request.getkFactor());
         tournament.setFormat(Format.getFormat(request.getFormat()));

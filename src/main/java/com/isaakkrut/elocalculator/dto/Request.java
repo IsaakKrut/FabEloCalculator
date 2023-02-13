@@ -39,4 +39,13 @@ public class Request {
     public void setFormat(String format) {
         this.format = format;
     }
+
+    @Override
+    public String toString() {
+        return "Request{" +
+                "matches='" + matches + '\'' +
+                ", kFactor=" + kFactor +
+                ", format='" + format + '\'' +
+                '}';
+    }
 }
